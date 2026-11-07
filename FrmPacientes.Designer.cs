@@ -74,13 +74,14 @@ namespace ClinicaTurnos
             this.colEmail.ReadOnly = true;
             this.colEmail.FillWeight = 150F;
             this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAgregar.Enabled = false;
+            this.btnAgregar.Enabled = true;
             this.btnAgregar.Location = new System.Drawing.Point(12, 408);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(90, 30);
             this.btnAgregar.TabIndex = 2;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             this.btnModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnModificar.Enabled = false;
             this.btnModificar.Location = new System.Drawing.Point(114, 408);

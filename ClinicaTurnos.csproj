@@ -57,6 +57,12 @@
     <Compile Include="FrmPacientes.Designer.cs">
       <DependentUpon>FrmPacientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPacienteDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPacienteDetalle.Designer.cs">
+      <DependentUpon>FrmPacienteDetalle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,6 +10,14 @@ namespace ClinicaTurnos
             InitializeComponent();
         }
 
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            using (FrmPacienteDetalle ventana = new FrmPacienteDetalle())
+            {
+                ventana.ShowDialog(this);
+            }
+        }
+
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             Close();
