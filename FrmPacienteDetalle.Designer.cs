@@ -15,6 +15,8 @@ namespace ClinicaTurnos
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.errores = new System.Windows.Forms.ErrorProvider(this.components);
             this.lblDni = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblApellido = new System.Windows.Forms.Label();
@@ -32,6 +34,8 @@ namespace ClinicaTurnos
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            this.errores.ContainerControl = this;
+            this.errores.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.lblDni.AutoSize = true;
             this.lblDni.Location = new System.Drawing.Point(20, 25);
             this.lblDni.Name = "lblDni";
@@ -151,6 +155,7 @@ namespace ClinicaTurnos
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.ErrorProvider errores;
         private System.Windows.Forms.Label lblDni;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblApellido;
