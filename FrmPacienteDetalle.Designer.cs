@@ -109,7 +109,7 @@ namespace ClinicaTurnos
             this.txtDireccion.Size = new System.Drawing.Size(350, 60);
             this.txtDireccion.TabIndex = 6;
             this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardar.Enabled = false;
+            this.btnGuardar.Enabled = true;
             this.btnGuardar.Location = new System.Drawing.Point(298, 350);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(95, 30);
