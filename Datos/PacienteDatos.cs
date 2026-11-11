@@ -58,5 +58,23 @@ namespace ClinicaTurnos.Datos
                 paciente.Id = (int)comando.ExecuteScalar();
             }
         }
+
+        public void Modificar(Paciente paciente)
+        {
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            using (SqlCommand comando = new SqlCommand("UPDATE dbo.Pacientes SET Dni = @Dni, Nombre = @Nombre, Apellido = @Apellido, FechaNacimiento = @FechaNacimiento, Telefono = @Telefono, Email = @Email, Direccion = @Direccion WHERE Id = @Id", conexion))
+            {
+                comando.Parameters.Add("@Id", SqlDbType.Int).Value = paciente.Id;
+                comando.Parameters.Add("@Dni", SqlDbType.NVarChar, 20).Value = paciente.Dni;
+                comando.Parameters.Add("@Nombre", SqlDbType.NVarChar, 80).Value = paciente.Nombre;
+                comando.Parameters.Add("@Apellido", SqlDbType.NVarChar, 80).Value = paciente.Apellido;
+                comando.Parameters.Add("@FechaNacimiento", SqlDbType.Date).Value = paciente.FechaNacimiento.Date;
+                comando.Parameters.Add("@Telefono", SqlDbType.NVarChar, 30).Value = paciente.Telefono;
+                comando.Parameters.Add("@Email", SqlDbType.NVarChar, 254).Value = paciente.Email;
+                comando.Parameters.Add("@Direccion", SqlDbType.NVarChar, 250).Value = paciente.Direccion;
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+        }
     }
 }

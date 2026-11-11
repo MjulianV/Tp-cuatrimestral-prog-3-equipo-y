@@ -1,17 +1,23 @@
 using System;
 using System.Data.SqlClient;
-using ClinicaTurnos.Datos;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using ClinicaTurnos.Datos;
 using ClinicaTurnos.Dominio;
 
 namespace ClinicaTurnos
 {
     public partial class FrmPacienteDetalle : Form
     {
+        private readonly Paciente pacienteExistente;
+
         public Paciente DatosPaciente { get; private set; }
 
-        public FrmPacienteDetalle()
+        public FrmPacienteDetalle() : this(null)
+        {
+        }
+
+        public FrmPacienteDetalle(Paciente paciente)
         {
             InitializeComponent();
             dtpFechaNacimiento.MaxDate = DateTime.Today;
@@ -20,6 +26,19 @@ namespace ClinicaTurnos
             txtNombre.KeyPress += SoloLetras_KeyPress;
             txtApellido.KeyPress += SoloLetras_KeyPress;
             btnGuardar.Click += btnGuardar_Click;
+            pacienteExistente = paciente;
+
+            if (pacienteExistente != null)
+            {
+                Text = "Modificar paciente";
+                txtDni.Text = pacienteExistente.Dni;
+                txtNombre.Text = pacienteExistente.Nombre;
+                txtApellido.Text = pacienteExistente.Apellido;
+                dtpFechaNacimiento.Value = pacienteExistente.FechaNacimiento;
+                txtTelefono.Text = pacienteExistente.Telefono;
+                txtEmail.Text = pacienteExistente.Email;
+                txtDireccion.Text = pacienteExistente.Direccion;
+            }
         }
 
         private void SoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
@@ -47,6 +66,7 @@ namespace ClinicaTurnos
 
             DatosPaciente = new Paciente
             {
+                Id = pacienteExistente == null ? 0 : pacienteExistente.Id,
                 Dni = txtDni.Text.Trim(),
                 Nombre = txtNombre.Text.Trim(),
                 Apellido = txtApellido.Text.Trim(),
@@ -59,11 +79,18 @@ namespace ClinicaTurnos
             try
             {
                 PacienteDatos datos = new PacienteDatos();
-                datos.Agregar(DatosPaciente);
+                if (pacienteExistente == null)
+                {
+                    datos.Agregar(DatosPaciente);
+                }
+                else
+                {
+                    datos.Modificar(DatosPaciente);
+                }
             }
             catch (SqlException)
             {
-                MessageBox.Show("No se pudo guardar el paciente. Revisá la conexión con la base de datos e intentá nuevamente.", "Pacientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No se pudieron guardar los cambios del paciente. Revisá la conexión con la base de datos e intentá nuevamente.", "Pacientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

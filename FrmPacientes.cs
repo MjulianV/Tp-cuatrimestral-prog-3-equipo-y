@@ -1,8 +1,8 @@
 using System;
-using System.Data.SqlClient;
-using ClinicaTurnos.Datos;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Windows.Forms;
+using ClinicaTurnos.Datos;
 using ClinicaTurnos.Dominio;
 
 namespace ClinicaTurnos
@@ -16,6 +16,8 @@ namespace ClinicaTurnos
             InitializeComponent();
             dgvPacientes.DataSource = pacientes;
             Load += FrmPacientes_Load;
+            dgvPacientes.SelectionChanged += dgvPacientes_SelectionChanged;
+            btnModificar.Click += btnModificar_Click;
         }
 
         private void FrmPacientes_Load(object sender, EventArgs e)
@@ -35,6 +37,11 @@ namespace ClinicaTurnos
             }
         }
 
+        private void dgvPacientes_SelectionChanged(object sender, EventArgs e)
+        {
+            btnModificar.Enabled = dgvPacientes.SelectedRows.Count > 0;
+        }
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             using (FrmPacienteDetalle ventana = new FrmPacienteDetalle())
@@ -42,6 +49,32 @@ namespace ClinicaTurnos
                 if (ventana.ShowDialog(this) == DialogResult.OK)
                 {
                     pacientes.Add(ventana.DatosPaciente);
+                }
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgvPacientes.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            Paciente pacienteSeleccionado = dgvPacientes.SelectedRows[0].DataBoundItem as Paciente;
+            if (pacienteSeleccionado == null)
+            {
+                return;
+            }
+
+            using (FrmPacienteDetalle ventana = new FrmPacienteDetalle(pacienteSeleccionado))
+            {
+                if (ventana.ShowDialog(this) == DialogResult.OK)
+                {
+                    int indice = pacientes.IndexOf(pacienteSeleccionado);
+                    if (indice >= 0)
+                    {
+                        pacientes[indice] = ventana.DatosPaciente;
+                    }
                 }
             }
         }
