@@ -18,6 +18,7 @@ namespace ClinicaTurnos
             Load += FrmPacientes_Load;
             dgvPacientes.SelectionChanged += dgvPacientes_SelectionChanged;
             btnModificar.Click += btnModificar_Click;
+            btnEliminar.Click += btnEliminar_Click;
         }
 
         private void FrmPacientes_Load(object sender, EventArgs e)
@@ -40,6 +41,7 @@ namespace ClinicaTurnos
         private void dgvPacientes_SelectionChanged(object sender, EventArgs e)
         {
             btnModificar.Enabled = dgvPacientes.SelectedRows.Count > 0;
+            btnEliminar.Enabled = dgvPacientes.SelectedRows.Count > 0;
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -76,6 +78,37 @@ namespace ClinicaTurnos
                         pacientes[indice] = ventana.DatosPaciente;
                     }
                 }
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvPacientes.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            Paciente pacienteSeleccionado = dgvPacientes.SelectedRows[0].DataBoundItem as Paciente;
+            if (pacienteSeleccionado == null)
+            {
+                return;
+            }
+
+            DialogResult respuesta = MessageBox.Show("¿Eliminar al paciente " + pacienteSeleccionado.Nombre + " " + pacienteSeleccionado.Apellido + "?", "Eliminar paciente", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (respuesta != DialogResult.Yes)
+            {
+                return;
+            }
+
+            try
+            {
+                PacienteDatos datos = new PacienteDatos();
+                datos.Eliminar(pacienteSeleccionado.Id);
+                pacientes.Remove(pacienteSeleccionado);
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("No se pudo eliminar el paciente. Revisá la conexión con la base de datos e intentá nuevamente.", "Pacientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

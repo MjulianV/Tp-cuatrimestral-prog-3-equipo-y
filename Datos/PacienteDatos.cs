@@ -59,6 +59,17 @@ namespace ClinicaTurnos.Datos
             }
         }
 
+        public void Eliminar(int id)
+        {
+            using (SqlConnection conexion = new SqlConnection(cadenaConexion))
+            using (SqlCommand comando = new SqlCommand("DELETE FROM dbo.Pacientes WHERE Id = @Id", conexion))
+            {
+                comando.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                conexion.Open();
+                comando.ExecuteNonQuery();
+            }
+        }
+
         public void Modificar(Paciente paciente)
         {
             using (SqlConnection conexion = new SqlConnection(cadenaConexion))
