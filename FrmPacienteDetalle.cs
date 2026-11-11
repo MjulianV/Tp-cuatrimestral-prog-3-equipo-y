@@ -1,4 +1,6 @@
 using System;
+using System.Data.SqlClient;
+using ClinicaTurnos.Datos;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ClinicaTurnos.Dominio;
@@ -53,6 +55,17 @@ namespace ClinicaTurnos
                 Email = txtEmail.Text.Trim(),
                 Direccion = txtDireccion.Text.Trim()
             };
+
+            try
+            {
+                PacienteDatos datos = new PacienteDatos();
+                datos.Agregar(DatosPaciente);
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("No se pudo guardar el paciente. Revisá la conexión con la base de datos e intentá nuevamente.", "Pacientes", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             DialogResult = DialogResult.OK;
             Close();

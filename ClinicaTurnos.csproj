@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -44,6 +45,7 @@
     <Compile Include="Dominio\Medico.cs" />
     <Compile Include="Dominio\Especialidad.cs" />
     <Compile Include="Dominio\TurnoTrabajo.cs" />
+    <Compile Include="Datos\PacienteDatos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
@@ -64,6 +66,9 @@
       <DependentUpon>FrmPacienteDetalle.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
