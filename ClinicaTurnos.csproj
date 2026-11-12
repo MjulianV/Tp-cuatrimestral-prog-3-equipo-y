@@ -65,10 +65,18 @@
     <Compile Include="FrmPacienteDetalle.Designer.cs">
       <DependentUpon>FrmPacienteDetalle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Datos\EspecialidadDatos.cs" />
+    <Compile Include="FrmEspecialidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEspecialidades.Designer.cs">
+      <DependentUpon>FrmEspecialidades.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="BaseDatos\Especialidades.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

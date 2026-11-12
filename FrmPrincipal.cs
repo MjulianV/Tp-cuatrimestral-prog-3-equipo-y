@@ -17,5 +17,13 @@ namespace ClinicaTurnos
                 ventana.ShowDialog(this);
             }
         }
+
+        private void especialidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FrmEspecialidades ventana = new FrmEspecialidades())
+            {
+                ventana.ShowDialog(this);
+            }
+        }
     }
 }
