@@ -72,6 +72,12 @@
     <Compile Include="FrmEspecialidades.Designer.cs">
       <DependentUpon>FrmEspecialidades.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmEspecialidadDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEspecialidadDetalle.Designer.cs">
+      <DependentUpon>FrmEspecialidadDetalle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
